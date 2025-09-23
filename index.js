@@ -1,6 +1,6 @@
 // === Constants ===
 const BASE = "https://fsa-crud-2aa9294fe819.herokuapp.com/api";
-const COHORT = ""; // Make sure to change this!
+const COHORT = "/2508"; // Make sure to change this!
 const API = BASE + COHORT;
 
 // === State ===
@@ -56,6 +56,28 @@ async function getGuests() {
     console.error(e);
   }
 }
+
+/** Add Party */
+
+async function addParty(party) {
+  try {
+    const response = await fetch(API + "/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(party),
+    });
+
+    if (response.ok) {
+      await getParties();
+    } else {
+      console.error("Failed to add party:", response.statusText);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+/** Delete Party  */
 
 // === Components ===
 
